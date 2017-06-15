@@ -1,0 +1,260 @@
+@import 'bourbon/bourbon';
+
+@mixin blockytext($color, $size) {
+    $shadow: 0 0 0 $color;
+    @for $i from 1 through $size {
+        $shadow: #{$shadow}, #{$i}px #{$i}px #{$color};
+    }
+    text-shadow: $shadow;
+}
+
+$text-color: #f03f35;
+$shadow-color: #b7e3e4;
+
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+}
+
+.catbox {
+    border: 100px solid paleturquoise;
+    box-sizing: border-box;
+    color: $text-color;
+    cursor: crosshair;
+    font-family: 'GT Haptik', sans-serif;
+    height: 100%;
+    width: 100%;
+    @include user-select(none);
+}
+
+.item {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    height: 40vh;
+    position: absolute;
+    width: 40vh;
+}
+
+.container {
+    display: table;
+    height: 100%;
+    margin: 0 auto;
+    max-width: 800px;
+    width: 80%;
+
+    .title {
+        display: table-cell;
+        font-size: 80px;
+        font-weight: 900;
+        letter-spacing: .15em;
+        line-height: 1.1;
+        text-align: center;
+        text-transform: uppercase;
+        vertical-align: middle;
+        width: 100%;
+        @include blockytext($shadow-color, 6);
+    }
+
+    .line {
+        display: inline-block;
+        margin: 0 15px;
+    }
+}
+
+.items {
+
+    .cell-phone {
+        @extend .item;
+        background-image: url('../img/dex1.jpg');
+        background-size: 50%;
+        right: 5%;
+        top: 5%;
+    }
+
+    .laptop {
+        @extend .item;
+        background-image: url('../img/dex2.jpg');
+        background-size: 50%;
+        height: 34vh;
+        left: 5%;
+        top: 5%;
+        width: 34vh;
+    }
+
+    .plant-right {
+        @extend .item;
+        background-image: url('../img/luna1.jpg');
+        background-size: 50%;
+        bottom: 5%;
+        right: 5%;
+    }
+
+    .plant-left {
+        @extend .item;
+        background-image: url('../img/luna2.jpg');
+        background-size: 50%;
+        bottom: 5%;
+        left: 5%;
+    }
+
+    .both-1 {
+        @extend .item;
+        bottom: 3%;
+        left: 40%;
+        background-image: url('../img/both1.jpg');
+        background-size: 50%;
+        margin-left: -100px;
+    }
+
+    .both-2 {
+        @extend .item;
+        top: 3%;
+        left: 40%;
+        background-image: url('../img/both2.jpg');
+        background-size: 50%;
+        margin-left: -100px;
+    }
+}
+
+.cathands {
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    @include transform-origin(0 0);
+
+    .cathands-inner {
+        height: 1160px;
+        left: 50%;
+        margin-left: -200px;
+        margin-top: 60px;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        width: 400px;
+        @include transition(transform 1s $ease-in-out-quart .1s);
+    }
+
+    .left-paw-wrapper,
+    .right-paw-wrapper {
+        height: 860px;
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        width: 387px;
+        @include transition(transform .1s cubic-bezier(0.175, 0.885, 0.425, 4));
+
+        &[data-boost='true'] {
+            @include transition(transform 2s $ease-out-circ);
+        }
+    }
+
+    .left-paw-wrapper {
+        left: -400px;
+        @include transform(rotate(-3deg));
+        @include transform-origin(125px 1075px);
+
+        &[data-boost='true'] {
+            @include transform(rotate(-15deg));
+        }
+    }
+
+    .right-paw-wrapper {
+        right: -400px;
+        @include transform(rotate(3deg));
+        @include transform-origin(262px 1075px);
+
+        &[data-boost='true'] {
+            @include transform(rotate(15deg));
+        }
+    }
+
+    .left-paw,
+    .right-paw {
+        background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/59639/cat-hands.png') no-repeat;
+        display: block;
+        height: 860px;
+        width: 387px;
+
+        .paw {
+            background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/59639/cat-hands.png') no-repeat;
+            display: block;
+            height: 300px;
+            position: absolute;
+            top: -185px;
+            width: 140px;
+        }
+    }
+
+    .left-paw {
+        background-position: 0 -300px;
+        @include animation(left-arm-idle 1.5s ease-in-out 0s infinite alternate);
+        @include transform(rotate(9deg));
+        @include transform-origin(125px 1075px);
+
+        .paw {
+            background-position: 0 0;
+            left: 275px;
+            @include animation(left-paw 2.25s ease-in-out infinite alternate);
+            @include transform(rotate(4deg));
+            @include transform-origin(55px 255px);
+        }
+    }
+
+    .right-paw {
+        background-position: -390px -300px;
+        @include animation(right-arm-idle 2s ease-in-out 0s infinite alternate);
+        @include transform(rotate(-9deg));
+        @include transform-origin(262px 1075px);
+
+        .paw {
+            background-position: -150px 0;
+            left: -25px;
+            @include animation(right-paw 2.25s ease-in-out infinite alternate);
+            @include transform(rotate(-4deg));
+            @include transform-origin(85px 255px);
+        }
+    }
+
+    &.hide {
+        .cathands-inner {
+            @include transform(translate3d(0, 110%, 0));
+            @include transition-delay(0s);
+        }
+
+        .left-paw,
+        .right-paw {
+            @include animation(none);
+
+            .paw {
+                @include animation(none);
+            }
+        }
+    }
+}
+
+// Left paw
+@include keyframes(left-arm-idle) {
+    0% { @include transform(translateY(0) rotate(9deg)); }
+    100% { @include transform(translateY(3%) rotate(10deg)); }
+}
+
+@include keyframes(left-paw) {
+    0% { @include transform(rotate(2deg)); }
+    100% { @include transform(rotate(6deg)); }
+}
+
+// Right paw
+@include keyframes(right-arm-idle) {
+    0% { @include transform(translateY(0) rotate(-9deg)); }
+    100% { @include transform(translateY(2%) rotate(-10deg)); }
+}
+
+@include keyframes(right-paw) {
+    0% { @include transform(rotate(-2deg)); }
+    100% { @include transform(rotate(-7deg)); }
+}
