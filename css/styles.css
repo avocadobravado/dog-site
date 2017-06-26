@@ -161,18 +161,17 @@ body {
       transform: rotate(15deg); }
   .cathands .left-paw,
   .cathands .right-paw {
-    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/59639/cat-hands.png") no-repeat;
+    background: url("../img/cat-hands.png") no-repeat;
     display: block;
     height: 860px;
     width: 387px; }
     .cathands .left-paw .paw,
     .cathands .right-paw .paw {
-      background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/59639/cat-hands.png") no-repeat;
       display: block;
-      height: 300px;
+      height: 800px;
       position: absolute;
-      top: -185px;
-      width: 140px; }
+      top: -50px;
+      width: 300px; }
   .cathands .left-paw {
     background-position: 0 -300px;
     -webkit-animation: left-arm-idle 1.5s ease-in-out 0s infinite alternate;
